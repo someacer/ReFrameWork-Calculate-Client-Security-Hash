@@ -3,7 +3,7 @@
     <x:Property Name="Vendor_TaxID" Type="InArgument(x:String)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1143,3005</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1143,3034</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
   <TextExpression.NamespacesForImplementation>
@@ -26,11 +26,12 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Download monthly report" sap:VirtualizedContainerService.HintSize="1103,2925" sap2010:WorkflowViewState.IdRef="Sequence_19">
+  <Sequence DisplayName="Download monthly report" sap:VirtualizedContainerService.HintSize="1103,2954" sap2010:WorkflowViewState.IdRef="Sequence_19">
     <Sequence.Variables>
-      <Variable x:TypeArguments="s:String[]" Default="[{&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;, &quot;November&quot;, &quot;December&quot;}]" Name="MonthList" />
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;January&quot;}]" Name="MonthList" />
       <Variable x:TypeArguments="x:Boolean" Name="bool_Report_Exists" />
       <Variable x:TypeArguments="x:String" Name="Monthly_Save_Path" />
       <Variable x:TypeArguments="ui:GenericValue" Name="Year" />
@@ -40,13 +41,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Attach Browser 'iexplore.exe ACME'" sap:VirtualizedContainerService.HintSize="1065,2833" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="db3e1b5cef2a0553bed0a94033f1ea45" Selector="&lt;html title='ACME System 1*' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Attach Browser 'iexplore.exe ACME'" sap:VirtualizedContainerService.HintSize="1065,2862" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="db3e1b5cef2a0553bed0a94033f1ea45" Selector="&lt;html title='ACME System 1*' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1035,2687" sap2010:WorkflowViewState.IdRef="Sequence_58">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1035,2716" sap2010:WorkflowViewState.IdRef="Sequence_58">
             <Sequence.Variables>
               <Variable x:TypeArguments="ui:GenericValue" Name="Month_Count" />
               <Variable x:TypeArguments="x:Boolean" Name="bool_Exists_Popup" />
@@ -108,7 +109,7 @@
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="0e9d1e2cd478fa891f7b39b424ca9ed3" Selector="&lt;html title='ACME System 1 - Reports - Download Monthly Report' /&gt;&lt;webctrl aaname='2018' parentid='searchForm' tag='A' /&gt;" WaitForReady="INTERACTIVE" />
               </ui:Click.Target>
             </ui:Click>
-            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="997,1828" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[MonthList]">
+            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="{}{&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;, &quot;November&quot;, &quot;December&quot;}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="997,1857" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[MonthList]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
@@ -283,6 +284,11 @@
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
           </Sequence>
         </ActivityAction>

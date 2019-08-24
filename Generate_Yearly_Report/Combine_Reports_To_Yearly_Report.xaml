@@ -4,11 +4,11 @@
     <x:Property Name="Vendor_TaxID" Type="InArgument(x:String)" />
     <x:Property Name="bool_Escape" Type="OutArgument(x:Boolean)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>925,1921</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>692,1353</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="7">
+    <scg:List x:TypeArguments="x:String" Capacity="14">
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Data</x:String>
@@ -16,10 +16,11 @@
       <x:String>System.Collections.Generic</x:String>
       <x:String>System.Activities</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="13">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
@@ -32,10 +33,11 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Combine reports to yearly report" sap:VirtualizedContainerService.HintSize="885,1841" sap2010:WorkflowViewState.IdRef="Sequence_55">
+  <Sequence DisplayName="Combine reports to yearly report" sap:VirtualizedContainerService.HintSize="652,1273" sap2010:WorkflowViewState.IdRef="Sequence_55">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd4:DataTable" Name="CSV_CONTENTS" />
       <Variable x:TypeArguments="x:Boolean" Name="bool_File_Exits" />
@@ -47,7 +49,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="847,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="614,61" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="ui:GenericValue">[Year]</OutArgument>
       </Assign.To>
@@ -55,16 +57,17 @@
         <InArgument x:TypeArguments="ui:GenericValue">[Today.Year - 1]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="847,1648" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Month_List]">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="614,207" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Month_List]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="month" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="815,1511" sap2010:WorkflowViewState.IdRef="Sequence_56">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_56">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:PathExists DisplayName="Path Exists" Exists="[bool_File_Exits]" sap:VirtualizedContainerService.HintSize="777,91" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="[in_Config(&quot;Month_Report_Save_Path&quot;).ToString + Vendor_TaxID + &quot;_&quot; + month.ToString +&quot;.csv&quot;]" PathType="File" />
@@ -97,30 +100,42 @@
                 </Sequence>
               </If.Else>
             </If>
-            <ui:PathExists DisplayName="Path Exists" Exists="[bool_File_Exits]" sap:VirtualizedContainerService.HintSize="777,91" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[in_Config(&quot;Month_Report_Save_Path&quot;).ToString + Vendor_TaxID + &quot;_&quot; + Year + &quot;.csv&quot;]" PathType="File" />
-            <If Condition="[bool_File_Exits]" sap:VirtualizedContainerService.HintSize="777,433" sap2010:WorkflowViewState.IdRef="If_3">
-              <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="368,280" sap2010:WorkflowViewState.IdRef="Sequence_59">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[CSV_CONTENTS]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Config(&quot;Month_Report_Save_Path&quot;).ToString + Vendor_TaxID + &quot;_&quot; + Year + &quot;.csv&quot;]" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3" />
-                  <Assign sap:VirtualizedContainerService.HintSize="330,61" sap2010:WorkflowViewState.IdRef="Assign_2">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Boolean">[bool_Escape]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </Sequence>
-              </If.Else>
-            </If>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
+    <ui:PathExists DisplayName="Path Exists" Exists="[bool_File_Exits]" sap:VirtualizedContainerService.HintSize="614,91" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[in_Config(&quot;Month_Report_Save_Path&quot;).ToString + Vendor_TaxID + &quot;_&quot; + Year + &quot;.csv&quot;]" PathType="File" />
+    <If Condition="[bool_File_Exits]" sap:VirtualizedContainerService.HintSize="614,702" sap2010:WorkflowViewState.IdRef="If_3">
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="470,549" sap2010:WorkflowViewState.IdRef="Sequence_59">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:BuildDataTable DataTable="[CSV_CONTENTS]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="432,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;InvoiceNumber&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Item&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Amount&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tax&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Currency&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;InvoiceNumber /&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;" />
+          <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[CSV_CONTENTS]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Config(&quot;Month_Report_Save_Path&quot;).ToString.Trim + Vendor_TaxID.Trim + &quot;_&quot; + Year.ToString.Trim + &quot;.csv&quot;]" sap:VirtualizedContainerService.HintSize="432,87" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3" />
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="432,231" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="297,153" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="259,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[bool_Escape]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+        </Sequence>
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>
