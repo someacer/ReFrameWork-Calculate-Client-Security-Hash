@@ -72,12 +72,12 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log App Initialization message" sap:VirtualizedContainerService.HintSize="564,95" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="Opening applications..." />
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACME_System1_Login workflow" sap:VirtualizedContainerService.HintSize="564,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Calculate_Client_Security_Hash\ACME_System1_Login.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACME_System1_Login workflow" sap:VirtualizedContainerService.HintSize="564,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Generate_Yearly_Report/ACME_System1_Login.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACME_System1_GetWorkItems workflow" sap:VirtualizedContainerService.HintSize="564,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Calculate_Client_Security_Hash\ACME_System1_GetWorkItems.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ACME_System1_GetWorkItems workflow" sap:VirtualizedContainerService.HintSize="564,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Generate_Yearly_Report/ACME_System1_GetWorkItems.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_WorkItems">[WorkItemsTable]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
@@ -94,7 +94,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[row(&quot;Type&quot;).ToString = &quot;WI5&quot;]" sap:VirtualizedContainerService.HintSize="480,213" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[row(&quot;Type&quot;).ToString = &quot;WI4&quot; and row(&quot;Status&quot;).ToString = &quot;Open&quot;]" sap:VirtualizedContainerService.HintSize="480,213" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="216,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_Config(&quot;OrchestratorQueueName&quot;).ToString]">
                   <ui:AddQueueItem.ItemInformation>
